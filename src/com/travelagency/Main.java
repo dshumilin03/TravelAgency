@@ -12,6 +12,6 @@ public class Main {
         System.out.println(tour1);
     }
     static Tour createTour(City city, BigDecimal price) {
-        return new Tour(city, city.getCountryName(), price);
+        return new Tour(city, price);
     }
 }

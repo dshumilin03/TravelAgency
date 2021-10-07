@@ -1,17 +1,17 @@
 package com.travelagency;
 
 public class Country {
-    private String name;
+    final private String name;
 
     public Country(String name) {
-        setName(name);
+        if (name == null) {
+            throw new NullPointerException("Country is not set");
+        }
+        this.name = name;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 }

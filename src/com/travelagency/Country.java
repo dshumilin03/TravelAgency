@@ -1,7 +1,7 @@
 package com.travelagency;
 
 public class Country {
-    final private String name;
+    private final String name;
 
     public Country(String name) {
         if (name == null) {

@@ -1,11 +1,15 @@
 package com.travelagency;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 
 public class Tour {
-    final private City city;
-    final private Country country;
-    final private BigDecimal price;
+    private final City city;
+    private final Country country;
+    private final BigDecimal price;
+    private BigDecimal rating;
+    private double ratingSum;
+    private int reviewsCount = 0;
 
     public Tour (City city, BigDecimal price) {
         if (city == null) {
@@ -20,6 +24,15 @@ public class Tour {
 
     }
 
+    public BigDecimal getRating() {
+        return rating;
+    }
+
+    public void addRating(double rating) {
+        this.reviewsCount++;
+        this.ratingSum += rating;
+        this.rating = BigDecimal.valueOf(ratingSum).divide(BigDecimal.valueOf(reviewsCount), RoundingMode.DOWN);
+    }
 
     public City getCity() {
         return city;
@@ -32,9 +45,10 @@ public class Tour {
     public BigDecimal getPrice() {
         return price;
     }
-    @Override
-    public String toString() {
+
+    public String info() {
         DecimalFormat moneyformat = new DecimalFormat("$0.00");
         return String.format("Here is a trip to %s, %s, for %s!", country.getName(), city.getName(), moneyformat.format(price));
     }
+
 }

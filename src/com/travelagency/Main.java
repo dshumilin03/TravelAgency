@@ -13,15 +13,20 @@ public class Main {
         System.out.println(tour1.info());
         Tour tour2 = createTour(moscow, BigDecimal.valueOf(5000));
         System.out.println(tour2.info());
-        tour2.addRating(5);
-        tour2.addRating(3);
-        tour2.addRating(5);
-        tour2.addRating(5);
-        tour2.addRating(5);
-
-
+        User user1 = createUser("myLogin", "myPassword");
+        Integer[] user1Birthday = new Integer[]{27, 4, 2003};
+        user1.addInfo("Ivan","Ivanov","example@mail.com", user1Birthday);
+        user1.setBalance(500);
+        user1.setToursCompleted(5);
+        System.out.println(user1.getInfo());
+        System.out.printf("Login: %s\nPassword: %s", user1.getLogin(), user1.getPassword());
     }
     static Tour createTour(City city, BigDecimal price) {
         return new Tour(city, price);
     }
+
+    static User createUser(String login, String password) {
+        return  new User(login, password);
+    }
+
 }

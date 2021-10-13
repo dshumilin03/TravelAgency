@@ -2,6 +2,8 @@ package com.travelagency;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 public class Tour {
     private final City city;
@@ -47,8 +49,8 @@ public class Tour {
     }
 
     public String info() {
-        DecimalFormat moneyformat = new DecimalFormat("$0.00");
-        return String.format("Here is a trip to %s, %s, for %s!", country.getName(), city.getName(), moneyformat.format(price));
+        NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(Locale.US);
+        return String.format("Here is a trip to %s, %s, for %s!", country.getName(), city.getName(), currencyFormatter.format(price));
     }
 
 }

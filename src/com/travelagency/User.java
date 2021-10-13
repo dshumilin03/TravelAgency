@@ -1,9 +1,11 @@
 package com.travelagency;
 
+import java.text.NumberFormat;
+import java.time.LocalDate;
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class User {
     private final String login;
@@ -11,9 +13,9 @@ public class User {
     private String name;
     private String surname;
     private String mail;
-    private Integer[] birthday = new Integer[3];
+    private LocalDate birthday;
     private BigDecimal balance = BigDecimal.valueOf(0);
-    private int ToursCompleted = 0;
+    private int toursCompleted = 0;
     private final List<String> reviews = new ArrayList<String>();
 
     public User(String login, String password) {
@@ -25,11 +27,11 @@ public class User {
         this.password = password;
     }
 
-    public void changeMail(String mail) {
+    public void setMail(String mail) {
         this.mail = mail;
     }
 
-    public void addInfo(String name, String surname, String mail, Integer[] birthday) {
+    public void addInfo(String name, String surname, String mail, LocalDate birthday) {
         this.name = name;
         this.surname = surname;
         this.mail = mail;
@@ -37,16 +39,13 @@ public class User {
     }
 
     public String getInfo() {
-        DecimalFormat moneyformat = new DecimalFormat("$0.00");
-        return "Name: %s\nSurname: %s\nMail: %s\nBalance: %s\nTours completed: %d\nDate of birth: %s.0%s.%s".formatted(
+        NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(Locale.US);
+        return "Name: %s\nSurname: %s\nMail: %s\nBalance: %s\nTours completed: %d\nDate of birth: %s".formatted(
                 this.surname,
                 this.name,
                 this.mail,
-                moneyformat.format(this.balance),
-                this.ToursCompleted,
-                this.birthday[0],
-                this.birthday[1],
-                this.birthday[2]);
+                currencyFormatter.format(this.balance),
+                this.toursCompleted, birthday);
     }
 
     public String getName() {
@@ -58,10 +57,10 @@ public class User {
     }
 
     public int getToursCompleted() {
-        return ToursCompleted;
+        return toursCompleted;
     }
 
-    public Integer[] getBirthday() {
+    public LocalDate getBirthday() {
         return birthday;
     }
 
@@ -85,12 +84,12 @@ public class User {
         return surname;
     }
 
-    public void setBalance(int balance) {
-        this.balance = BigDecimal.valueOf(balance);
+    public void setBalance(BigDecimal balance) {
+        this.balance = balance;
     }
 
     public void setToursCompleted(int toursCompleted) {
-        ToursCompleted = toursCompleted;
+        this.toursCompleted = toursCompleted;
     }
 
     public void setReviews(String review) {
